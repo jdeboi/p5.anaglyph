@@ -1,0 +1,19 @@
+{
+  "name": "p5.anaglyph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/p5.anaglyph.min.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "Jenna deBoisblanc",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
