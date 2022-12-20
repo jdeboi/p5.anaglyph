@@ -6,7 +6,7 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 
 
 
-### Example
+## Example
 You'll find the library, `p5.anaglyph.min.js`, in the dist folder of this repo.Alternatively, you can get the library through jsDelivr (include in `index.html` after p5.js library):  
   
 ```html
@@ -40,6 +40,6 @@ function scene(pg) {
 ```
 
 
-### Code adapted from:
+## Code adapted from:
 * [Camera 3D Processing Library](https://github.com/hx2A/Camera3D)
 * [three.js anaglyph effect](https://github.com/mrdoob/three.js/blob/d091564e0279adb607f9a2867fdd9f6dbfe10b2e/examples/jsm/effects/AnaglyphEffect.js)
