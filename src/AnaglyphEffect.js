@@ -32,7 +32,7 @@ class AnaglyphEffect {
         // I could have the user put the shaders in their project folder, 
         // but is loading from jsdelivr easier?
         let filePath = "https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/src/shader/anaglyph"
-        this.theShader = loadShader(filePath + '.vert', filePath + '.frag', () => {this.shaderLoaded = true});
+        this.theShader = loadShader(filePath + '.vert', filePath + '.frag', () => { this.shaderLoaded = true });
 
         this.divergence = divergence;
 
@@ -66,23 +66,51 @@ class AnaglyphEffect {
 
     draw(scene) {
         if (this.theShader && this.shaderLoaded) {
-            this.drawSide(this.LEFT_IMG, this.imgLeft, scene);
-            this.drawSide(this.RIGHT_IMG, this.imgRight, scene);
+            this.drawScene(this.LEFT_IMG, this.imgLeft, scene);
+            this.drawScene(this.RIGHT_IMG, this.imgRight, scene);
 
-            this.theShader.setUniform("u_resolution", [width, height]);
-            this.theShader.setUniform("mapLeft", this.imgLeft);
-            this.theShader.setUniform("mapRight", this.imgRight);
-            shader(this.theShader);
-
-            rect(0, 0, width, height);
+            this.updateShader();
         }
         else {
-            this.drawSide(this.LEFT_IMG, this.imgLeft, scene);
+            this.drawScene(this.LEFT_IMG, this.imgLeft, scene);
             image(this.imgLeft, -width / 2, -height / 2);
         }
     }
 
-    drawSide(side, pg, scene) {
+    updateShader() {
+        this.theShader.setUniform("u_resolution", [width, height]);
+        this.theShader.setUniform("mapLeft", this.imgLeft);
+        this.theShader.setUniform("mapRight", this.imgRight);
+        shader(this.theShader);
+        rect(0, 0, width, height);
+    }
+
+    drawStereoImages(left, right, x=0, y=0) {
+        if (this.theShader && this.shaderLoaded) {
+            this.drawImage(left, this.imgLeft, x, y);
+            this.drawImage(right, this.imgRight, x, y);
+            this.updateShader();
+        }
+        else {
+            this.drawImage(left, this.imgLeft);
+            image(this.imgLeft, -width / 2, -height / 2);
+        }
+    }
+
+    drawImage(img, pg, x=0, y=0) {
+        if (img) {
+            // in WEBGL mode, everything is draw from center
+            // origin is center
+            pg.push();
+            pg.clear();
+            // pg.translate(-img.width/2, -img.height/2);
+            pg.image(img, x, y);
+            pg.pop();
+        }
+       
+    }
+
+    drawScene(side, pg, scene) {
         pg.push();
         pg.clear();
         this.getCamera(side, pg);

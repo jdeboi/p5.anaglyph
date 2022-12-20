@@ -8,10 +8,12 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 
 ## Example
 
-[editor.p5js.org example](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
+#### editor.p5js.org examples
+* [basic demo](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
+* [anaglyph from stereo left/right images](https://editor.p5js.org/jdeboi/sketches/DhI-93bAi)
 
----
 
+#### basic sketch
 In the `index.html`:   
   
 ```html
