@@ -7,6 +7,8 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 
 
 ## Example
+[editor.p5js.org example](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
+  
 You'll find the library, `p5.anaglyph.min.js`, in the dist folder of this repo.Alternatively, you can get the library through jsDelivr (include in `index.html` after p5.js library):  
   
 ```html
