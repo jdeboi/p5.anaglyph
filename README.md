@@ -8,9 +8,9 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 
 ## Example
 
->  
-> [editor.p5js.org example](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
->
+[editor.p5js.org example](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
+
+---
 
 In the `index.html`:   
   
