@@ -11,7 +11,8 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 
 ---
 
-You'll find the library, `p5.anaglyph.min.js`, in the dist folder of this repo.Alternatively, you can get the library through jsDelivr (include in `index.html` after p5.js library):  
+In the `index.html`
+You'll find the library, `p5.anaglyph.min.js`, in the dist folder of this repo.Alternatively, you can get the library through jsDelivr (include after p5.js library):  
   
 ```html
 <script src="https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/dist/p5.anaglyph.min.js"></script>
