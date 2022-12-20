@@ -9,7 +9,7 @@
 
 class AnaglyphEffect {
 
-    
+
 
     constructor() {
         this.divergence = 1;
@@ -27,9 +27,11 @@ class AnaglyphEffect {
     }
 
     init(divergence = 1) {
-  
-
-        this.theShader = loadShader('./shader/anaglyph.vert', './shader/anaglyph.frag');
+        // TODO - there must be a better way to do this... ?
+        // I could have the user put the shaders in their project folder, 
+        // but is loading from jsdelivr easier?
+        let filePath = "https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/src/shader/anaglyph"
+        this.theShader = loadShader(filePath + '.vert', filePath + '.frag');
 
         this.divergence = divergence;
 
@@ -52,7 +54,7 @@ class AnaglyphEffect {
             fovy: PI / 3,
         };
 
-        
+
 
         this.perspective();
         this.recalculateCameraSettings();
@@ -75,7 +77,7 @@ class AnaglyphEffect {
         }
         else {
             this.drawSide(this.LEFT_IMG, this.imgLeft, scene);
-            image(this.imgLeft, -width/2, -height/2);
+            image(this.imgLeft, -width / 2, -height / 2);
         }
     }
 
@@ -92,11 +94,11 @@ class AnaglyphEffect {
             this.adjustTargetFactor *
             (this.config.cameraPositionX - this.config.cameraTargetX);
 
-         let dy =
+        let dy =
             this.adjustTargetFactor *
             (this.config.cameraPositionY - this.config.cameraTargetY);
 
-       
+
         let dz =
             this.adjustTargetFactor *
             (this.config.cameraPositionZ - this.config.cameraTargetZ);
