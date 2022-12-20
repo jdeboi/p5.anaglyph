@@ -7,13 +7,7 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 
 
 ### Example
-You'll find the library, `p5.anaglyph.min.js`, in the dist folder of this repo. Include the library in your `index.html` (after loading p5.js).
-
-```html
-<script type="text/javascript" src="p5.anaglyph.min.js"></script>
-```
-  
-Alternatively, you can get the library through jsDelivr:  
+You'll find the library, `p5.anaglyph.min.js`, in the dist folder of this repo.Alternatively, you can get the library through jsDelivr (include in `index.html` after p5.js library):  
   
 ```html
 <script src="https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/dist/p5.anaglyph.min.js"></script>
@@ -36,7 +30,7 @@ function draw() {
 
 // this is the logic of the scene
 // all usual methods from draw(), but call on the 
-// pGraphics parameter
+// pGraphics parameter pg
 function scene(pg) {
   pg.background(0);
   pg.fill(255);
