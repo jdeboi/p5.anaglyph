@@ -7,7 +7,7 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 ![banner](images/banner.png)
 
 
-## editor.p5.js Examples
+## Examples
 
 * [basic demo](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
 * [anaglyph from stereo left/right images](https://editor.p5js.org/jdeboi/sketches/DhI-93bAi)
