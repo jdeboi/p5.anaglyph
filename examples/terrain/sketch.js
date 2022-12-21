@@ -28,8 +28,8 @@ function draw() {
 
 function scene(pg) {
     pg.push();
-    pg.background(255);
-    pg.stroke(0);
+    pg.background(0);
+    pg.stroke(255);
     pg.strokeWeight(5);
     pg.fill(255, 50);
     
