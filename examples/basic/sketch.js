@@ -15,7 +15,7 @@ function setup() {
     anaglyph = createAnaglyph(this);
 
     // set the divergence (try between -1 & 1)
-    anaglyph.setDivergence(-.5);
+    anaglyph.setDivergence(1);
 }
 
 function draw() {

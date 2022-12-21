@@ -2,18 +2,15 @@
 let anaglyph;
 
 
-let scale = 100;
-let cols, rows;
-let w = 1000;
-let h = 1000;
-
-let flightPos = 0;
-let terrain = [];
-
-let controls = {
+let terrain = {
+    scale: 100,
+    w: 1000,
+    h: 1000,
+    flightPos: 0,
     flightSpeed: .0010,
     noiseDelta: .4,
-    terrainHeight: 200
+    terrainHeight: 200,
+    coords: []
 }
 
 
@@ -21,14 +18,9 @@ let controls = {
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
 
-    // set the divergence (try between -1 & 1)
-    anaglyph = createAnaglyph(this, -1);
+    anaglyph = createAnaglyph(this);
 
-    cols = w / scale;
-    rows = h / scale;
-    for (let x = 0; x < cols; ++x) {
-        terrain[x] = [];
-    }
+    initTerrain();
 }
 
 function draw() {
@@ -37,48 +29,49 @@ function draw() {
 
 function scene(pg) {
     pg.push();
-    pg.background(0);
+    pg.background(255);
     pg.stroke(0);
     pg.strokeWeight(5);
-    pg.fill(255);
-    pg.translate(0, 150, -500);
-    pg.rotateY(1);
+    pg.fill(255, 50);
+    
+    pg.translate(0, 100, -200);
     drawTerrain(pg);
     pg.pop();
 }
 
-
+function initTerrain() {
+    terrain.cols = terrain.w / terrain.scale;
+    terrain.rows = terrain.h / terrain.scale;
+    for (let x = 0; x < terrain.cols; ++x) {
+        terrain.coords[x] = [];
+    }
+}
 
 function drawTerrain(pg) {
-    flightPos -= controls.flightSpeed;
+    terrain.flightPos -= terrain.flightSpeed;
     shiftNoiseSpace();
-
-    // background(51);
-    pg.stroke(255);
-    pg.fill(255, 80);
-
     pg.rotateX(PI / 2);
-    pg.translate((-w / 2) + 1, (-h / 2) + 30);
+    pg.translate((-terrain.w / 2) + 1, (-terrain.h / 2) + 30);
 
-    for (let y = 0; y < rows - 1; ++y) {
+    for (let y = 0; y < terrain.rows - 1; ++y) {
         pg.beginShape(TRIANGLE_STRIP);
-        for (let x = 0; x < cols; ++x) {
-            pg.vertex(x * scale, y * scale, terrain[x][y]);
-            pg.vertex(x * scale, (y + 1) * scale, terrain[x][y + 1]);
+        for (let x = 0; x < terrain.cols; ++x) {
+            pg.vertex(x * terrain.scale, y * terrain.scale, terrain.coords[x][y]);
+            pg.vertex(x * terrain.scale, (y + 1) * terrain.scale, terrain.coords[x][y + 1]);
         }
         pg.endShape();
     }
 }
 
 function shiftNoiseSpace() {
-    let yOffset = flightPos;
-    for (let y = 0; y < rows; ++y) {
+    let yOffset = terrain.flightPos;
+    for (let y = 0; y < terrain.rows; ++y) {
         let xOffset = 0;
-        for (let x = 0; x < cols; ++x) {
-            terrain[x][y] = map(noise(xOffset, yOffset), 0, 1, -controls.terrainHeight, controls.terrainHeight);
-            xOffset += controls.noiseDelta;
+        for (let x = 0; x < terrain.cols; ++x) {
+            terrain.coords[x][y] = map(noise(xOffset, yOffset), 0, 1, -terrain.terrainHeight, terrain.terrainHeight);
+            xOffset += terrain.noiseDelta;
         }
-        yOffset += controls.noiseDelta;
+        yOffset += terrain.noiseDelta;
     }
 }
 
