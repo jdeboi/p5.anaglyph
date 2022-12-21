@@ -46,7 +46,8 @@ void main() {
   // p5.js vTexCoord = uv in three.js? vTexCoord
   vec2 uv = vTexCoord;
   // the texture is loaded upside down and backwards by default so lets flip it
-  uv.y = 1.0 - uv.y;
+  // but p5.js has a flipped y already... ? Let's keep it that way?
+  //   uv.y = 1.0 - uv.y;
   
   vec4 colorL = lin( texture2D( mapLeft, uv ) );
   vec4 colorR = lin( texture2D( mapRight, uv ) );

@@ -27,6 +27,6 @@ function setup() {
 }
 
 function draw() {
-    anaglyph.drawStereoImages(imgLeft, imgRight, 0, 0);
+    anaglyph.drawStereoImages(imgLeft, imgRight, mouseX-width/2, 0);
 }
 

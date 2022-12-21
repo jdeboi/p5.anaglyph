@@ -32,8 +32,9 @@ class AnaglyphEffect {
         // I could have the user put the shaders in their project folder, 
         // but is loading from jsdelivr easier?
         let filePath = "https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/src/shader/anaglyph"
+        // let filePath = "../../src/shader/anaglyph";
         this.theShader = loadShader(filePath + '.vert', filePath + '.frag', () => { this.shaderLoaded = true });
-
+    
         this.divergence = divergence;
 
         this.config = {
@@ -99,12 +100,14 @@ class AnaglyphEffect {
 
     drawImage(img, pg, x=0, y=0) {
         if (img) {
-            // in WEBGL mode, everything is draw from center
-            // origin is center
+            // in WEBGL mode, origin is at center
+            // for some reason shader flips images?
+            // have to reverse them in the y
             pg.push();
             pg.clear();
-            // pg.translate(-img.width/2, -img.height/2);
-            pg.image(img, x, y);
+            pg.translate(x, y);
+            pg.scale(1, -1);
+            pg.image(img, 0, 0);
             pg.pop();
         }
        
@@ -270,17 +273,12 @@ p5.prototype.createAnaglyph = function (divergence = 1) {
 };
 
 
-p5.prototype.camera = function (...args) {
-    // TODO
-    // update config
-    // recalculateCameraSettings()
-}
-
-p5.prototype.frustrum = function (...args) {
-    // TODO
-    // update config
-    // recalculateCameraSettings()
-}
+// TODO
+// when camera() or frustrum() are called
+// update config
+// recalculateCameraSettings()
+// p5.prototype.camera = function (...args) {}
+// p5.prototype.frustrum = function (...args) {}
 
 // p5.prototype.registerMethod('pre', () => pAnaglyph.begin());
 // p5.prototype.registerMethod('post', () => pAnaglyph.display());
