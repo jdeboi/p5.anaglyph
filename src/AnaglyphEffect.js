@@ -35,8 +35,8 @@ class AnaglyphEffect {
         // TODO - there must be a better way to do this... ?
         // I could have the user put the shaders in their project folder, 
         // but is loading from jsdelivr easier?
-        // let filePath = "https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/src/shader/anaglyph"
-        let filePath = "../../src/shader/anaglyph";
+        let filePath = "https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/src/shader/anaglyph"
+        // let filePath = "../../src/shader/anaglyph";
         this.theShader = this.pInst.loadShader(filePath + '.vert', filePath + '.frag', () => { this.shaderLoaded = true });
 
 
