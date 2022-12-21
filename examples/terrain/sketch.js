@@ -46,15 +46,15 @@ function scene(pg) {
     pg.stroke(0);
     pg.strokeWeight(5);
     pg.fill(255);
-    pg.translate(0, -150, -500);
+    pg.translate(0, 150, -500);
     pg.rotateY(1);
     drawTerrain(pg);
     pg.pop();
 
     if (font) {
         pg.textFont(font, 100);
-        pg.rotateY(0);
-        pg.text("p5.anaglyph", 0, 0);
+        pg.rotateY(-.7);
+        pg.text("p5.anaglyph", -200, 0);
     }
 }
 

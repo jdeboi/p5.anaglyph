@@ -20,7 +20,7 @@ let imgLeft, imgRight;
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
 
-    anaglyph = createAnaglyph(.5);
+    anaglyph = createAnaglyph(this);
 
     imgLeft = loadImage("left.jpeg");
     imgRight = loadImage("right.jpeg");

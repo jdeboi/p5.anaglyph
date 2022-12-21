@@ -11,9 +11,9 @@ let anaglyph;
 
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
-
-    // set the divergence (try between -1 & 1)
-    anaglyph = createAnaglyph(-.3);
+    
+    anaglyph = createAnaglyph(this);
+    anaglyph.setDivergence(-.3);
 }
 
 function draw() {

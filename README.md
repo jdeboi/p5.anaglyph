@@ -4,6 +4,7 @@ p5.anaglyph is a [p5.js](https://p5js.org/) library for creating 3D (anaglyph) s
   
 Created by [Jenna deBoisblanc](https://jdeboi.com/). 
 
+![banner](images/banner.png)
 
 
 ## Examples

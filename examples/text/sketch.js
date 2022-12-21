@@ -13,7 +13,7 @@ let anaglyph;
 
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
-    anaglyph = createAnaglyph(.5);
+    anaglyph = createAnaglyph(this);
     font = loadFont("AdobeClean-Light.otf");
 }
 
