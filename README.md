@@ -7,14 +7,15 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 ![banner](images/banner.png)
 
 
-## Examples
+## editor.p5.js Examples
 
 * [basic demo](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
 * [anaglyph from stereo left/right images](https://editor.p5js.org/jdeboi/sketches/DhI-93bAi)
 * [array of boxes](https://editor.p5js.org/jdeboi/sketches/HBSn7y0rI)
 * [3D text](https://editor.p5js.org/jdeboi/sketches/yX0oANWzG)
 
----
+
+## Sample Code
 
 In the `index.html`:   
   
