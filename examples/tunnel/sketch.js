@@ -21,21 +21,10 @@ function draw() {
 }
 
 function scene(pg) {
-    pg.background(0);
-    // for (let x = 0; x < 10; x++) {
-    //     for (let y = 0; y < 10; y++) {
-    //         pg.push();
-    //         let dx = map(x, 0, 10, -width / 2, width / 2);
-    //         let dy = map(y, 0, 10, -height / 2, height / 2);
-    //         let dz = map(y, 0, 10, -550, 550);
-    //         dz *= sin(millis() / 1000)
-    //         pg.translate(dx, dy, dz);
-    //         pg.fill(x * 25, y * 25, 255);
-    //         pg.box(40);
-    //         pg.pop();
-    //     }
-    // }
+    const boxW = 300;
 
+    pg.background(0);
+  
     pg.rectMode(CENTER);
     pg.noFill();
     pg.strokeWeight(10);
@@ -45,20 +34,18 @@ function scene(pg) {
         let dz = (z * 100 + frameCount) % 2000;
         dz -= 800;
         pg.translate(0, 0, dz);
-        pg.rect(0, 0, 300);
+        pg.rect(0, 0, boxW);
         pg.pop();
     }
-
-
 
     pg.push();
     pg.rotateX(PI / 2);
     // floor
-    pg.translate(0, 0, -150);
-    pg.rect(0, 0, 300, 1800);
+    pg.translate(0, 0, -boxW/2);
+    pg.rect(0, 0, boxW, 1800);
     // ceiling
-    pg.translate(0, 0, 300);
-    pg.rect(0, 0, 300, 1800);
+    pg.translate(0, 0, boxW);
+    pg.rect(0, 0, boxW, 1800);
     pg.pop();
 
 
