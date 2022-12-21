@@ -1,6 +1,6 @@
+// Daniel Shiffman https://www.youtube.com/watch?v=IKB1hWWedMk
 
 let anaglyph;
-
 
 let terrain = {
     scale: 100,
@@ -12,7 +12,6 @@ let terrain = {
     terrainHeight: 200,
     coords: []
 }
-
 
 
 function setup() {

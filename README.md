@@ -11,7 +11,7 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 **NOTE** - for red/cyan glasses, the most common method is red on the left eye and blue on the right eye. 
 * [basic demo](https://jdeboi.com/p5.anaglyph/examples/basic/)  
 * [terrain](https://jdeboi.com/p5.anaglyph/examples/terrain/)
-* [array of boxes](https://jdeboi.com/p5.anaglyph/examples/tunnel/)
+* [tunnel](https://jdeboi.com/p5.anaglyph/examples/tunnel/)
 * [text](https://jdeboi.com/p5.anaglyph/examples/text/)
 * [anaglyph from stereo left/right images](https://jdeboi.com/p5.anaglyph/examples/stereo/)
 
