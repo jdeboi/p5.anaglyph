@@ -17,8 +17,8 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 
 ## Sample Code
 
-In the `index.html`:   
-  
+In the `index.html`:     
+Note - there may be issues with caching and jsdelivr depending upon if I've made changes recently; if something breaks, you can find the library `p5.anaglyph.min.js` in the dist folder.
 ```html
 <script src="https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/dist/p5.anaglyph.min.js"></script>
 ```
