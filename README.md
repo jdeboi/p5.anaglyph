@@ -1,6 +1,6 @@
 # p5.anaglyph
 
-p5.anaglyph is a [p5.js](https://p5js.org/) library for creating 3D (anaglyph) scenes using red/cyan glasses. Uses [Dubois anaglyph algorithm](https://www.site.uottawa.ca/~edubois/anaglyph/) & color matrices.   
+p5.anaglyph is a [p5.js](https://p5js.org/) library for creating 3D (anaglyph) scenes and images using red/cyan glasses. Uses [Dubois anaglyph algorithm](https://www.site.uottawa.ca/~edubois/anaglyph/) & color matrices.   
   
 Created by [Jenna deBoisblanc](https://jdeboi.com/). 
 

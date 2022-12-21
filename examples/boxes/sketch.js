@@ -20,9 +20,6 @@ function draw() {
     anaglyph.draw(scene);
 }
 
-// this is the logic of the scene
-// all usual methods from draw(), but call on the 
-// pGraphics parameter
 function scene(pg) {
     pg.background(0);
     for (let x = 0; x < 10; x++) {

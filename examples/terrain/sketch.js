@@ -29,17 +29,12 @@ function setup() {
     for (let x = 0; x < cols; ++x) {
         terrain[x] = [];
     }
-
-    font = loadFont("AdobeClean-Light.otf");
 }
 
 function draw() {
     anaglyph.draw(scene);
 }
 
-// this is the logic of the scene
-// all usual methods from draw(), but call on the 
-// pGraphics parameter
 function scene(pg) {
     pg.push();
     pg.background(0);
@@ -50,12 +45,6 @@ function scene(pg) {
     pg.rotateY(1);
     drawTerrain(pg);
     pg.pop();
-
-    if (font) {
-        pg.textFont(font, 100);
-        pg.rotateY(-.7);
-        pg.text("p5.anaglyph", -200, 0);
-    }
 }
 
 

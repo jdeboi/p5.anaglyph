@@ -35,6 +35,7 @@ class AnaglyphEffect {
         // let filePath = "../../src/shader/anaglyph";
         this.theShader = this.pInst.loadShader(filePath + '.vert', filePath + '.frag', () => { this.shaderLoaded = true });
 
+
         this.config = {
             cameraPositionX: 0,
             cameraPositionY: 0,
@@ -56,12 +57,13 @@ class AnaglyphEffect {
 
 
 
-    
         this.recalculateCameraSettings();
 
         this.imgLeft = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
         this.imgRight = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
+        this.output = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
     }
+
 
     draw(scene) {
         if (this.theShader && this.shaderLoaded) {
@@ -76,7 +78,7 @@ class AnaglyphEffect {
         }
     }
 
-    setDivergence(divergence=1) {
+    setDivergence(divergence = 1) {
         this.divergence = divergence;
     }
 
@@ -84,11 +86,14 @@ class AnaglyphEffect {
         this.theShader.setUniform("u_resolution", [this.pInst.width, this.pInst.height]);
         this.theShader.setUniform("mapLeft", this.imgLeft);
         this.theShader.setUniform("mapRight", this.imgRight);
-        this.pInst.shader(this.theShader);
-        this.pInst.rect(0, 0, this.pInst.width, this.pInst.height);
+        this.output.clear();
+        this.output.shader(this.theShader);
+        this.output.rect(0, 0, this.pInst.width, this.pInst.height);
+
+        this.pInst.image(this.output, -this.pInst.width/2, -this.pInst.height/2);
     }
 
-    drawStereoImages(left, right, x=0, y=0) {
+    drawStereoImages(left, right, x = 0, y = 0) {
         if (this.theShader && this.shaderLoaded) {
             this.drawImage(left, this.imgLeft, x, y);
             this.drawImage(right, this.imgRight, x, y);
@@ -96,11 +101,11 @@ class AnaglyphEffect {
         }
         else {
             this.drawImage(left, this.imgLeft);
-            this.pInst.image(this.imgLeft, -this.pInst.width / 2, -this.pInst.height / 2);
+            // this.pInst.image(this.imgLeft, -this.pInst.width / 2, -this.pInst.height / 2);
         }
     }
 
-    drawImage(img, pg, x=0, y=0) {
+    drawImage(img, pg, x = 0, y = 0) {
         if (img) {
             // in WEBGL mode, origin is at center
             // for some reason shader flips images?
@@ -112,7 +117,7 @@ class AnaglyphEffect {
             pg.image(img, 0, 0);
             pg.pop();
         }
-       
+
     }
 
     drawScene(side, pg, scene) {

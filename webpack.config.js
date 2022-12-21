@@ -15,8 +15,13 @@ module.exports = {
         exclude: /node_modules/,
         use: "babel-loader",
       },
+      // Require .vert and .frag as raw text.
+      {
+        test: /\.(vert|frag)$/i,
+        use: 'raw-loader',
+      }
     ],
   },
-  
+
   mode: "production"
 }

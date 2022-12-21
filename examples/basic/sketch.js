@@ -13,6 +13,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
 
     anaglyph = createAnaglyph(this);
+
     // set the divergence (try between -1 & 1)
     anaglyph.setDivergence(-.5);
 }
@@ -29,7 +30,6 @@ function scene(pg) {
     pg.fill(255);
     pg.rotateY(frameCount / 200);
     pg.box(200);
-
 }
 
 function windowResized() {
