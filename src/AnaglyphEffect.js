@@ -33,36 +33,36 @@ class AnaglyphEffect {
         // but is loading from jsdelivr easier?
         let filePath = "https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/src/shader/anaglyph"
         // let filePath = "../../src/shader/anaglyph";
-        this.theShader = loadShader(filePath + '.vert', filePath + '.frag', () => { this.shaderLoaded = true });
+        this.theShader = this.pInst.loadShader(filePath + '.vert', filePath + '.frag', () => { this.shaderLoaded = true });
     
         this.divergence = divergence;
 
         this.config = {
             cameraPositionX: 0,
             cameraPositionY: 0,
-            cameraPositionZ: height / 2 / tan(PI / 6),
+            cameraPositionZ: this.pInst.height / 2 / this.pInst.tan(this.pInst.PI / 6),
             cameraTargetX: 0,
             cameraTargetY: 0,
             cameraTargetZ: 0,
             cameraUpX: 0,
             cameraUpY: 1,
             cameraUpZ: 0,
-            frustumLeft: -width / 2,
-            frustumRight: width / 2,
-            frustumBottom: -height / 2,
-            frustumTop: height / 2,
+            frustumLeft: -this.pInst.width / 2,
+            frustumRight: this.pInst.width / 2,
+            frustumBottom: -this.pInst.height / 2,
+            frustumTop: this.pInst.height / 2,
             frustumNear: 0,
-            frustumFar: max(width, height),
+            frustumFar: max(this.pInst.width, this.pInst.height),
             fovy: PI / 3,
         };
 
 
 
-        this.perspective();
+    
         this.recalculateCameraSettings();
 
-        this.imgLeft = createGraphics(width, height, WEBGL);
-        this.imgRight = createGraphics(width, height, WEBGL);
+        this.imgLeft = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
+        this.imgRight = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
     }
 
     draw(scene) {
@@ -74,16 +74,16 @@ class AnaglyphEffect {
         }
         else {
             this.drawScene(this.LEFT_IMG, this.imgLeft, scene);
-            image(this.imgLeft, -width / 2, -height / 2);
+            image(this.imgLeft, -this.pInst.width / 2, -this.pInst.height / 2);
         }
     }
 
     updateShader() {
-        this.theShader.setUniform("u_resolution", [width, height]);
+        this.theShader.setUniform("u_resolution", [this.pInst.width, this.pInst.height]);
         this.theShader.setUniform("mapLeft", this.imgLeft);
         this.theShader.setUniform("mapRight", this.imgRight);
-        shader(this.theShader);
-        rect(0, 0, width, height);
+        this.pInst.shader(this.theShader);
+        this.pInst.rect(0, 0, this.pInst.width, this.pInst.height);
     }
 
     drawStereoImages(left, right, x=0, y=0) {
@@ -94,7 +94,7 @@ class AnaglyphEffect {
         }
         else {
             this.drawImage(left, this.imgLeft);
-            image(this.imgLeft, -width / 2, -height / 2);
+            this.pInst.image(this.imgLeft, -this.pInst.width / 2, -this.pInst.height / 2);
         }
     }
 
@@ -123,6 +123,7 @@ class AnaglyphEffect {
 
 
     recalculateCameraSettings() {
+        this.perspective();
         let dx =
             this.adjustTargetFactor *
             (this.config.cameraPositionX - this.config.cameraTargetX);
@@ -241,9 +242,9 @@ class AnaglyphEffect {
     }
 
     perspective() {
-        let cameraZ = height / 2 / Math.tan((PI * 60.0) / 360.0);
+        let cameraZ = this.pInst.height / 2 / Math.tan((PI * 60.0) / 360.0);
         let fovy = PI / 3;
-        let aspect = width / height;
+        let aspect = this.pInst.width / this.pInst.height;
         let zNear = cameraZ / 10;
         let zFar = cameraZ * 10;
         let ymax = zNear * Math.tan(fovy / 2);
@@ -262,15 +263,23 @@ class AnaglyphEffect {
         this.config.frustumFar = far;
         this.config.fovy = 2 * Math.atan(top / near);
     }
+
+    resize() {
+        this.recalculateCameraSettings();
+    }
+
 }
 
 
 const pAnaglyph = new AnaglyphEffect();
 
-p5.prototype.createAnaglyph = function (divergence = 1) {
+p5.prototype.createAnaglyph = function (pInst, divergence = 1) {
+    pAnaglyph.pInst = pInst;
     pAnaglyph.init(divergence);
     return pAnaglyph;
 };
+
+
 
 
 // TODO

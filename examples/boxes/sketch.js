@@ -47,8 +47,8 @@ function scene(pg) {
     pg.rect(0, 0, 300);
 }
 
+
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+    anaglyph.resize();
 }
-
-

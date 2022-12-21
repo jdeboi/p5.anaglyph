@@ -30,3 +30,7 @@ function draw() {
     anaglyph.drawStereoImages(imgLeft, imgRight, mouseX-width/2, 0);
 }
 
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    anaglyph.resize();
+}

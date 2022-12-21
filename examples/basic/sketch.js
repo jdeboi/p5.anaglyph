@@ -28,10 +28,11 @@ function scene(pg) {
   pg.fill(255);
   pg.rotateY(frameCount / 200);
   pg.box(200);
+  
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+    resizeCanvas(windowWidth, windowHeight);
+    anaglyph.resize();
 }
-
 

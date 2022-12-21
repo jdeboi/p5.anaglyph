@@ -4,7 +4,7 @@ let anaglyph;
 
 let scale = 100;
 let cols, rows;
-let w = 1400;
+let w = 1000;
 let h = 1000;
 
 let flightPos = 0;
@@ -22,13 +22,15 @@ function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
 
     // set the divergence (try between -1 & 1)
-    anaglyph = createAnaglyph(-1);
+    anaglyph = createAnaglyph(this, -1);
 
     cols = w / scale;
     rows = h / scale;
     for (let x = 0; x < cols; ++x) {
         terrain[x] = [];
     }
+
+    font = loadFont("AdobeClean-Light.otf");
 }
 
 function draw() {
@@ -39,16 +41,21 @@ function draw() {
 // all usual methods from draw(), but call on the 
 // pGraphics parameter
 function scene(pg) {
+    pg.push();
     pg.background(0);
     pg.stroke(0);
     pg.strokeWeight(5);
     pg.fill(255);
     pg.translate(0, -150, -500);
-    //   pg.rotateY(frameCount / 200);
     pg.rotateY(1);
-    //   pg.box(200);
-
     drawTerrain(pg);
+    pg.pop();
+
+    if (font) {
+        pg.textFont(font, 100);
+        pg.rotateY(0);
+        pg.text("p5.anaglyph", 0, 0);
+    }
 }
 
 
@@ -84,4 +91,9 @@ function shiftNoiseSpace() {
         }
         yOffset += controls.noiseDelta;
     }
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    anaglyph.resize();
 }
