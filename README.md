@@ -9,10 +9,10 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 
 ## Examples
 
-* [basic demo](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
-* [anaglyph from stereo left/right images](https://editor.p5js.org/jdeboi/sketches/DhI-93bAi)
-* [array of boxes](https://editor.p5js.org/jdeboi/sketches/HBSn7y0rI)
-* [3D text](https://editor.p5js.org/jdeboi/sketches/yX0oANWzG)
+* [basic demo](/examples/basic/index.html)  
+* [anaglyph from stereo left/right images](/examples/basic/stereo.html)
+* [array of boxes](/examples/basic/boxes.html)
+* [3D text](/examples/basic/text.html)
 
 
 ## Sample Code
