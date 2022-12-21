@@ -9,9 +9,9 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 
 ## Examples
 **NOTE** - for red/cyan glasses, the most common method is red on the left eye and blue on the right eye. 
-* [basic demo](https://jdeboi.com/p5.anaglyph/examples/basic/)  
-* [terrain](https://jdeboi.com/p5.anaglyph/examples/terrain/)
-* [tunnel](https://jdeboi.com/p5.anaglyph/examples/tunnel/)
+* [basic demo](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
+* [terrain](https://editor.p5js.org/jdeboi/sketches/HBSn7y0rI)
+* [tunnel](https://editor.p5js.org/jdeboi/sketches/sMKm31dQH)
 * [text](https://jdeboi.com/p5.anaglyph/examples/text/)
 * [anaglyph from stereo left/right images](https://jdeboi.com/p5.anaglyph/examples/stereo/)
 
