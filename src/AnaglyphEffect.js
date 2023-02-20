@@ -139,7 +139,6 @@ class AnaglyphEffect {
 
     draw(scene) {
         if (this.theShader && this.shaderLoaded) {
-            if (frameCount % 300 == 0) console.log("1", this.theShader, "2", this.theShader2);
             this.drawScene(this.LEFT_IMG, this.imgLeft, scene);
             this.drawScene(this.RIGHT_IMG, this.imgRight, scene);
 
