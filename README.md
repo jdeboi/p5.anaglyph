@@ -53,3 +53,7 @@ function scene(pg) {
 Code adapted from:
 * [Camera 3D Processing Library](https://github.com/hx2A/Camera3D)
 * [three.js anaglyph effect](https://github.com/mrdoob/three.js/blob/d091564e0279adb607f9a2867fdd9f6dbfe10b2e/examples/jsm/effects/AnaglyphEffect.js)
+
+  
+  Other links:
+  * [p5.js & shader tutorial](https://itp-xstory.github.io/p5js-shaders/#/)

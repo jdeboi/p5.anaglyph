@@ -1,6 +1,7 @@
 // Daniel Shiffman https://www.youtube.com/watch?v=IKB1hWWedMk
 
 let anaglyph;
+let font;
 
 let terrain = {
     scale: 100,
@@ -13,6 +14,10 @@ let terrain = {
     coords: []
 }
 
+function preload() {
+    font = loadFont("assets/AdobeClean-Light.otf");
+}
+
 
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
@@ -23,7 +28,9 @@ function setup() {
 }
 
 function draw() {
+    background(255)
     anaglyph.draw(scene);
+    // displayFrameRate();
 }
 
 function scene(pg) {
@@ -32,7 +39,7 @@ function scene(pg) {
     pg.stroke(0);
     pg.strokeWeight(5);
     pg.fill(255, 50);
-    
+
     pg.translate(0, 100, -200);
     drawTerrain(pg);
     pg.pop();
@@ -77,4 +84,13 @@ function shiftNoiseSpace() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
     anaglyph.resize();
+}
+
+
+function displayFrameRate() {
+    textFont(font);
+    fill(0);
+    noStroke();
+    textSize(18);
+    text(frameRate(), -width / 2 + 50, -height / 2 + 50);
 }

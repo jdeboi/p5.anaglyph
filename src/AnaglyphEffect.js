@@ -29,49 +29,117 @@ class AnaglyphEffect {
         this.LEFT_IMG = 0;
         this.RIGHT_IMG = 1;
         this.shaderLoaded = false;
+        this.fc = -1;
     }
 
     init() {
-        // TODO - there must be a better way to do this... ?
-        // I could have the user put the shaders in their project folder, 
-        // but is loading from jsdelivr easier?
-        // shader got cached... creating new branch?
-        let filePath = "https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph@latest/src/shader/anaglyph"
-        // let filePath = "../../src/shader/anaglyph";
-        this.theShader = this.pInst.loadShader(filePath + '.vert', filePath + '.frag', () => { this.shaderLoaded = true });
+        if (frameCount != this.fc) {
+            this.fc = frameCount;
+
+            const vert = '#ifdef GL_ES \n' +
+                'precision mediump float; \n' +
+                '#endif \n' +
+                'attribute vec3 aPosition;' +
+                'attribute vec2 aTexCoord;' +
+                'varying vec2 vTexCoord;' +
+                'void main() {' +
+                'vTexCoord = aTexCoord;' +
+                'vec4 positionVec4 = vec4(aPosition, 1.0);' +
+                'positionVec4.xy = positionVec4.xy * 2.0 - 1.0;' +
+                'gl_Position = positionVec4;' +
+                '}'
+
+            const frag = '#ifdef GL_ES \n' +
+                'precision mediump float; \n' +
+                '#endif \n' +
+                'varying vec2 vTexCoord;' +
+                'uniform vec2 u_resolution;' +
+                'uniform sampler2D mapLeft;' +
+                'uniform sampler2D mapRight;' +
+
+                'mat3 colorMatrixLeft = mat3(' +
+                '0.456100, - 0.0400822, - 0.0152161,' +
+                '0.500484, - 0.0378246, - 0.0205971,' +
+                '0.176381, - 0.0157589, - 0.00546856' +
+                ');' +
+
+                'mat3 colorMatrixRight = mat3(' +
+                '- 0.0434706, 0.378476, - 0.0721527,' +
+                '- 0.0879388, 0.73364, - 0.112961,' +
+                '- 0.00155529, - 0.0184503, 1.2264' +
+                ');' +
+                'float lin( float c ) {' +
+                'return c <= 0.04045 ? c * 0.0773993808 :' +
+                'pow( c * 0.9478672986 + 0.0521327014, 2.4 );' +
+                '}' +
+
+                'vec4 lin( vec4 c ) {' +
+                'return vec4( lin( c.r ), lin( c.g ), lin( c.b ), c.a );' +
+                '}' +
+
+                'float dev( float c ) {' +
+                'return c <= 0.0031308 ? c * 12.92' +
+                ': pow( c, 0.41666 ) * 1.055 - 0.055;' +
+                '}' +
+
+                'void main() {' +
+                'vec2 uv = vTexCoord;' +
+                'vec4 colorL = lin( texture2D( mapLeft, uv ) );' +
+                'vec4 colorR = lin( texture2D( mapRight, uv ) );' +
+
+                'vec3 color = clamp(' +
+                'colorMatrixLeft * colorL.rgb +' +
+                'colorMatrixRight * colorR.rgb, 0., 1. );' +
+
+                'gl_FragColor = vec4(' +
+                'dev( color.r ), dev( color.g ), dev( color.b ),' +
+                'max( colorL.a, colorR.a ) );' +
+                '}';
 
 
-        this.config = {
-            cameraPositionX: 0,
-            cameraPositionY: 0,
-            cameraPositionZ: this.pInst.height / 2 / this.pInst.tan(this.pInst.PI / 6),
-            cameraTargetX: 0,
-            cameraTargetY: 0,
-            cameraTargetZ: 0,
-            cameraUpX: 0,
-            cameraUpY: 1,
-            cameraUpZ: 0,
-            frustumLeft: -this.pInst.width / 2,
-            frustumRight: this.pInst.width / 2,
-            frustumBottom: -this.pInst.height / 2,
-            frustumTop: this.pInst.height / 2,
-            frustumNear: 0,
-            frustumFar: max(this.pInst.width, this.pInst.height),
-            fovy: PI / 3,
-        };
+
+            this.config = {
+                cameraPositionX: 0,
+                cameraPositionY: 0,
+                cameraPositionZ: this.pInst.height / 2 / this.pInst.tan(this.pInst.PI / 6),
+                cameraTargetX: 0,
+                cameraTargetY: 0,
+                cameraTargetZ: 0,
+                cameraUpX: 0,
+                cameraUpY: 1,
+                cameraUpZ: 0,
+                frustumLeft: -this.pInst.width / 2,
+                frustumRight: this.pInst.width / 2,
+                frustumBottom: -this.pInst.height / 2,
+                frustumTop: this.pInst.height / 2,
+                frustumNear: 0,
+                frustumFar: max(this.pInst.width, this.pInst.height),
+                fovy: PI / 3,
+            };
 
 
 
-        this.recalculateCameraSettings();
+            this.recalculateCameraSettings();
 
-        this.imgLeft = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
-        this.imgRight = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
-        this.output = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
+            this.imgLeft = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
+            this.imgRight = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
+            this.output = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
+
+            this.theShader = this.output.createShader(vert, frag);
+            this.shaderLoaded = true;
+
+            // TODO - I don't think the anaglyph matrices are setup to handle
+            // alpha channel - effect ruined if background is cleared
+            // this.imgLeft.setAttributes('alpha', true);
+            // this.imgRight.setAttributes('alpha', true);
+            // this.output.setAttributes('alpha', true);
+        }
     }
 
 
     draw(scene) {
         if (this.theShader && this.shaderLoaded) {
+            if (frameCount % 300 == 0) console.log("1", this.theShader, "2", this.theShader2);
             this.drawScene(this.LEFT_IMG, this.imgLeft, scene);
             this.drawScene(this.RIGHT_IMG, this.imgRight, scene);
 
@@ -95,7 +163,7 @@ class AnaglyphEffect {
         this.output.shader(this.theShader);
         this.output.rect(0, 0, this.pInst.width, this.pInst.height);
 
-        this.pInst.image(this.output, -this.pInst.width/2, -this.pInst.height/2);
+        this.pInst.image(this.output, -this.pInst.width / 2, -this.pInst.height / 2);
     }
 
     drawStereoImages(left, right, x = 0, y = 0) {
@@ -106,7 +174,6 @@ class AnaglyphEffect {
         }
         else {
             this.drawImage(left, this.imgLeft);
-            // this.pInst.image(this.imgLeft, -this.pInst.width / 2, -this.pInst.height / 2);
         }
     }
 
