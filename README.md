@@ -12,8 +12,8 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 * [basic demo](https://editor.p5js.org/jdeboi/sketches/vTjpXtNOL)  
 * [terrain](https://editor.p5js.org/jdeboi/sketches/HBSn7y0rI)
 * [tunnel](https://editor.p5js.org/jdeboi/sketches/sMKm31dQH)
-* [text](https://jdeboi.com/p5.anaglyph/examples/text/)
-* [anaglyph from stereo left/right images](https://jdeboi.com/p5.anaglyph/examples/stereo/)
+* [text](https://editor.p5js.org/jdeboi/sketches/yX0oANWzG)
+* [anaglyph from stereo left/right images](https://editor.p5js.org/jdeboi/sketches/DhI-93bAi)
 
 ## Sample Code
 
