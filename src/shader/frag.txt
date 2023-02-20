@@ -43,4 +43,4 @@
   'gl_FragColor = vec4('+
     'dev( color.r ), dev( color.g ), dev( color.b ),'+
     'max( colorL.a, colorR.a ) );'+
-'}'
+'}';

@@ -20,7 +20,7 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 In the `index.html`:     
 **NOTE** - there may be issues with caching and jsdelivr depending upon if I've made changes recently; if something breaks, you can find the library `p5.anaglyph.min.js` in the dist folder.
 ```html
-<script src="https://cdn.jsdelivr.net/gh/jdeboi/p5.anaglyph/dist/p5.anaglyph.min.js"></script>
+<script src="https://cdn.statically.io/gh/jdeboi/p5.anaglyph/main/dist/p5.mapper.min.js"></script>
 ```
 
 In the `sketch.js`:
