@@ -14,6 +14,7 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 * [tunnel](https://editor.p5js.org/jdeboi/sketches/sMKm31dQH)
 * [text](https://editor.p5js.org/jdeboi/sketches/yX0oANWzG)
 * [anaglyph from stereo left/right images](https://editor.p5js.org/jdeboi/sketches/DhI-93bAi)
+* [p5.js instance mode](https://editor.p5js.org/jdeboi/sketches/ZPNopjLAu)
 
 ## Sample Code
 
