@@ -13,6 +13,7 @@ Created by [Jenna deBoisblanc](https://jdeboi.com/).
 * [terrain](https://editor.p5js.org/jdeboi/sketches/HBSn7y0rI)
 * [tunnel](https://editor.p5js.org/jdeboi/sketches/sMKm31dQH)
 * [text](https://editor.p5js.org/jdeboi/sketches/yX0oANWzG)
+* [3D .obj model](https://editor.p5js.org/jdeboi/sketches/yPXwFtu9f)
 * [anaglyph from stereo left/right images](https://editor.p5js.org/jdeboi/sketches/DhI-93bAi)
 
 ## Sample Code

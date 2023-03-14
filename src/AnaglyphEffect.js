@@ -33,8 +33,8 @@ class AnaglyphEffect {
     }
 
     init() {
-        if (frameCount != this.fc) {
-            this.fc = frameCount;
+        if (this.pInst.frameCount != this.fc) {
+            this.fc = this.pInst.frameCount;
 
             const vert = '#ifdef GL_ES \n' +
                 'precision mediump float; \n' +
@@ -113,17 +113,17 @@ class AnaglyphEffect {
                 frustumBottom: -this.pInst.height / 2,
                 frustumTop: this.pInst.height / 2,
                 frustumNear: 0,
-                frustumFar: max(this.pInst.width, this.pInst.height),
-                fovy: PI / 3,
+                frustumFar: this.pInst.max(this.pInst.width, this.pInst.height),
+                fovy: this.pInst.PI / 3,
             };
 
 
 
             this.recalculateCameraSettings();
 
-            this.imgLeft = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
-            this.imgRight = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
-            this.output = createGraphics(this.pInst.width, this.pInst.height, WEBGL);
+            this.imgLeft = this.pInst.createGraphics(this.pInst.width, this.pInst.height, this.pInst.WEBGL);
+            this.imgRight = this.pInst.createGraphics(this.pInst.width, this.pInst.height, this.pInst.WEBGL);
+            this.output = this.pInst.createGraphics(this.pInst.width, this.pInst.height, this.pInst.WEBGL);
 
             this.theShader = this.output.createShader(vert, frag);
             this.shaderLoaded = true;
@@ -146,7 +146,7 @@ class AnaglyphEffect {
         }
         else {
             this.drawScene(this.LEFT_IMG, this.imgLeft, scene);
-            image(this.imgLeft, -this.pInst.width / 2, -this.pInst.height / 2);
+            this.pInst.image(this.imgLeft, -this.pInst.width / 2, -this.pInst.height / 2);
         }
     }
 
@@ -320,8 +320,8 @@ class AnaglyphEffect {
     }
 
     perspective() {
-        let cameraZ = this.pInst.height / 2 / Math.tan((PI * 60.0) / 360.0);
-        let fovy = PI / 3;
+        let cameraZ = this.pInst.height / 2 / Math.tan((this.pInst.PI * 60.0) / 360.0);
+        let fovy = this.pInst.PI / 3;
         let aspect = this.pInst.width / this.pInst.height;
         let zNear = cameraZ / 10;
         let zFar = cameraZ * 10;
