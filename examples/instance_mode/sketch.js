@@ -11,6 +11,7 @@ let anaglyph;
 let font;
 
 new p5((p5) => {
+    
     p5.preload = () => {
         font = p5.loadFont("assets/AdobeClean-Light.otf");
     }
