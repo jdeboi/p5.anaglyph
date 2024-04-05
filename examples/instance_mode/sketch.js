@@ -7,6 +7,8 @@
   12/20/22
 */
 
+import AnaglyphEffect from "../../src/AnaglyphEffect";
+
 let anaglyph;
 let font;
 
@@ -18,7 +20,7 @@ new p5((p5) => {
 
     p5.setup = () => {
         p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL);
-        anaglyph = p5.createAnaglyph(p5);
+        anaglyph = new AnaglyphEffect(p5);
     }
 
     p5.draw = () => {

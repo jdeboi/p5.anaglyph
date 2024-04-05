@@ -10,28 +10,27 @@
 let anaglyph;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight, WEBGL);
+  createCanvas(windowWidth, windowHeight, WEBGL);
 
-    anaglyph = createAnaglyph(this);
-    anaglyph.setDivergence(1);
+  anaglyph = createAnaglyph(this);
+  anaglyph.setDivergence(1);
 }
 
 function draw() {
-    anaglyph.draw(scene);
+  anaglyph.draw(scene);
 }
 
 // this is the logic of the scene
-// all usual methods from draw(), but call on the 
+// all usual methods from draw(), but call on the
 // pGraphics parameter
 function scene(pg) {
-    pg.background(0);
-    pg.fill(255);
-    pg.rotateY(frameCount / 200);
-    pg.box(200);
+  pg.background(0);
+  pg.fill(255);
+  pg.rotateY(frameCount / 200);
+  pg.box(200);
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-    anaglyph.resize();
+  resizeCanvas(windowWidth, windowHeight);
+  anaglyph.resize();
 }
-
