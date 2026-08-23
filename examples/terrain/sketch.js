@@ -4,93 +4,101 @@ let anaglyph;
 let font;
 
 let terrain = {
-    scale: 100,
-    w: 1000,
-    h: 1000,
-    flightPos: 0,
-    flightSpeed: .0010,
-    noiseDelta: .4,
-    terrainHeight: 200,
-    coords: []
-}
+  scale: 100,
+  w: 1000,
+  h: 1000,
+  flightPos: 0,
+  flightSpeed: 0.001,
+  noiseDelta: 0.4,
+  terrainHeight: 200,
+  coords: [],
+};
 
-function preload() {
-    font = loadFont("assets/AdobeClean-Light.otf");
-}
+async function setup() {
+  createCanvas(windowWidth, windowHeight, WEBGL);
 
+  font = await loadFont("assets/AdobeClean-Light.otf");
 
-function setup() {
-    createCanvas(windowWidth, windowHeight, WEBGL);
+  anaglyph = createAnaglyph(this);
 
-    anaglyph = createAnaglyph(this);
-
-    initTerrain();
+  initTerrain();
 }
 
 function draw() {
-    background(255)
-    anaglyph.draw(scene);
-    // displayFrameRate();
+  background(255);
+  anaglyph.draw(scene);
+  // scene(this);
+  displayFrameRate();
 }
 
 function scene(pg) {
-    pg.push();
-    pg.background(255);
-    pg.stroke(0);
-    pg.strokeWeight(5);
-    pg.fill(255, 50);
+  pg.push();
+  pg.background(255);
+  // pg.stroke(0);
+  // pg.strokeWeight(5);
+  pg.noStroke();
+  pg.fill(0, 50);
 
-    pg.translate(0, 100, -200);
-    drawTerrain(pg);
-    pg.pop();
+  pg.translate(0, 100, -200);
+  drawTerrain(pg);
+  pg.pop();
 }
 
 function initTerrain() {
-    terrain.cols = terrain.w / terrain.scale;
-    terrain.rows = terrain.h / terrain.scale;
-    for (let x = 0; x < terrain.cols; ++x) {
-        terrain.coords[x] = [];
-    }
+  terrain.cols = terrain.w / terrain.scale;
+  terrain.rows = terrain.h / terrain.scale;
+  for (let x = 0; x < terrain.cols; ++x) {
+    terrain.coords[x] = [];
+  }
 }
 
 function drawTerrain(pg) {
-    terrain.flightPos -= terrain.flightSpeed;
-    shiftNoiseSpace();
-    pg.rotateX(PI / 2);
-    pg.translate((-terrain.w / 2) + 1, (-terrain.h / 2) + 30);
+  terrain.flightPos -= terrain.flightSpeed;
+  shiftNoiseSpace();
+  pg.rotateX(PI / 2);
+  pg.translate(-terrain.w / 2 + 1, -terrain.h / 2 + 30);
 
-    for (let y = 0; y < terrain.rows - 1; ++y) {
-        pg.beginShape(TRIANGLE_STRIP);
-        for (let x = 0; x < terrain.cols; ++x) {
-            pg.vertex(x * terrain.scale, y * terrain.scale, terrain.coords[x][y]);
-            pg.vertex(x * terrain.scale, (y + 1) * terrain.scale, terrain.coords[x][y + 1]);
-        }
-        pg.endShape();
+  for (let y = 0; y < terrain.rows - 1; ++y) {
+    pg.beginShape(TRIANGLE_STRIP);
+    for (let x = 0; x < terrain.cols; ++x) {
+      pg.vertex(x * terrain.scale, y * terrain.scale, terrain.coords[x][y]);
+      pg.vertex(
+        x * terrain.scale,
+        (y + 1) * terrain.scale,
+        terrain.coords[x][y + 1]
+      );
     }
+    pg.endShape();
+  }
 }
 
 function shiftNoiseSpace() {
-    let yOffset = terrain.flightPos;
-    for (let y = 0; y < terrain.rows; ++y) {
-        let xOffset = 0;
-        for (let x = 0; x < terrain.cols; ++x) {
-            terrain.coords[x][y] = map(noise(xOffset, yOffset), 0, 1, -terrain.terrainHeight, terrain.terrainHeight);
-            xOffset += terrain.noiseDelta;
-        }
-        yOffset += terrain.noiseDelta;
+  let yOffset = terrain.flightPos;
+  for (let y = 0; y < terrain.rows; ++y) {
+    let xOffset = 0;
+    for (let x = 0; x < terrain.cols; ++x) {
+      terrain.coords[x][y] = map(
+        noise(xOffset, yOffset),
+        0,
+        1,
+        -terrain.terrainHeight,
+        terrain.terrainHeight
+      );
+      xOffset += terrain.noiseDelta;
     }
+    yOffset += terrain.noiseDelta;
+  }
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-    anaglyph.resize();
+  resizeCanvas(windowWidth, windowHeight);
+  anaglyph.resize();
 }
 
-
 function displayFrameRate() {
-    textFont(font);
-    fill(0);
-    noStroke();
-    textSize(18);
-    text(frameRate(), -width / 2 + 50, -height / 2 + 50);
+  textFont(font);
+  fill(0);
+  noStroke();
+  textSize(18);
+  text(round(frameRate()), -width / 2 + 50, -height / 2 + 50);
 }

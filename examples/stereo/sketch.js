@@ -10,20 +10,13 @@
 let anaglyph;
 let imgLeft, imgRight;
 
-// TODO 
-// for some reason calling preload() creates extra WEBGL contexts
-// and the browser complains?? There can apparently be 8 max
-// There's the original canvas, 2 in the library (left / right buffers)
-// and then two images => 1 + 2 + 2 = 5, so not sure what the deal
-// is... but it works when the preload is taken out. Confused.
-
-function setup() {
+async function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
 
     anaglyph = createAnaglyph(this);
 
-    imgLeft = loadImage("left.jpeg");
-    imgRight = loadImage("right.jpeg");
+    imgLeft = await loadImage("left.jpeg");
+    imgRight = await loadImage("right.jpeg");
 }
 
 function draw() {

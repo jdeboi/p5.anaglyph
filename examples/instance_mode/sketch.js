@@ -7,20 +7,15 @@
   12/20/22
 */
 
-import AnaglyphEffect from "../../src/AnaglyphEffect";
-
 let anaglyph;
 let font;
 
 new p5((p5) => {
-    
-    p5.preload = () => {
-        font = p5.loadFont("assets/AdobeClean-Light.otf");
-    }
 
-    p5.setup = () => {
+    p5.setup = async () => {
         p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL);
-        anaglyph = new AnaglyphEffect(p5);
+        font = await p5.loadFont("assets/AdobeClean-Light.otf");
+        anaglyph = p5.createAnaglyph(p5);
     }
 
     p5.draw = () => {
