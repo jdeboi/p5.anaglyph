@@ -470,17 +470,20 @@ export class AnaglyphEffect {
 // ---------------------------------
 // p5.js v2 compatibility patch
 // ---------------------------------
-// As of p5.js v2, camera()/perspective()/ortho()/frustum() are only
+// As of p5.js v2, camera()/perspective()/ortho()/frustum()/model() are only
 // attached to the main p5 instance's prototype, not to p5.Graphics.prototype
-// (see p5's webgl/p5.Camera.js). AnaglyphEffect renders each eye into an
-// off-screen WEBGL p5.Graphics buffer and positions its camera directly on
-// that buffer, so we restore the same delegating methods p5 core uses
-// internally (`this._renderer.<method>(...args)`) if they're missing.
+// (see p5's webgl/p5.Camera.js and webgl/loading.js). AnaglyphEffect renders
+// each eye into an off-screen WEBGL p5.Graphics buffer and positions its
+// camera / draws models directly on that buffer, so we restore the same
+// delegating methods p5 core uses internally
+// (`this._renderer.<method>(...args)`) if they're missing.
 function patchGraphicsCameraMethods(P5: typeof p5): void {
   const GraphicsProto = (P5 as any).Graphics?.prototype;
   if (!GraphicsProto) return;
 
-  (["camera", "perspective", "ortho", "frustum"] as const).forEach((name) => {
+  (
+    ["camera", "perspective", "ortho", "frustum", "model"] as const
+  ).forEach((name) => {
     if (typeof GraphicsProto[name] === "function") return;
     GraphicsProto[name] = function (this: any, ...args: any[]) {
       this._renderer[name](...args);
