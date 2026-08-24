@@ -171,14 +171,13 @@ export class AnaglyphEffect {
     this.recalculateCameraSettings();
     this._createGraphics();
 
-    if (!this.output) return;
-
-    this.theShader = this.output.createShader(ANAGLYPH_VERT, ANAGLYPH_FRAG);
-    this.shaderLoaded = true;
     this.initialized = true;
   }
 
-  // factor out graphics allocation so we can reuse it in resize()
+  // factor out graphics allocation so we can reuse it in resize(). Each
+  // p.createGraphics() call makes a new WEBGL context, so the shader (which
+  // is tied to whichever context created it) must be recreated against the
+  // new `output` buffer every time this runs, not just on init().
   private _createGraphics(): void {
     if (!this.pInst) return;
     const p = this.pInst;
@@ -199,6 +198,9 @@ export class AnaglyphEffect {
       this._height,
       p.WEBGL as unknown as any
     );
+
+    this.theShader = this.output.createShader(ANAGLYPH_VERT, ANAGLYPH_FRAG);
+    this.shaderLoaded = true;
   }
 
   draw(scene: AnaglyphSceneFn): void {
