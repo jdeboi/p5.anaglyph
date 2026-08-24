@@ -14,7 +14,7 @@ function setup() {
 
   anaglyph = createAnaglyph(this);
 
-  loadModel("teapot.obj", true, (model) => {
+  loadModel("teapot.obj", ".obj", true, (model) => {
     teapot = model;
   });
 }
